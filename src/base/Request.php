@@ -140,8 +140,6 @@ class Request extends Object
             function ($param) use (&$exist) {
                 if ($param instanceof InputFile)
                     $exist = true;
-
-                var_dump($param);
             }
         );
 
