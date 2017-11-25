@@ -1,26 +1,31 @@
-<?php namespace api\inline;
+<?php namespace api\media;
 
+use api\InputFile;
 use api\base\Object;
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
 /**
- * Class InlineQueryResult
- * @package api\inline
- * @link https://core.telegram.org/bots/api#inlinequeryresult
+ * Class InputMedia
+ * @package api\media
+ * @link https://core.telegram.org/bots/api#inputmedia
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
  * @since 3.5
  *
- * @property string $id
+ * @property string|InputFile media
+ * @property string caption
  *
- * @method bool hasId()
- * @method $this setId($string)
- * @method $this remId()
- * @method string getId($default = null)
- *
+ * @method bool hasMedia()
+ * @method bool hasCaption()
+ * @method $this setMedia($file)
+ * @method $this setCaption($string)
+ * @method $this remMedia()
+ * @method $this remCaption()
+ * @method string|InputFile getMedia($default = null)
+ * @method string getCaption($default = null)
  */
-abstract class InlineQueryResult extends Object
+abstract class InputMedia extends Object
 {
 
     /**
@@ -31,9 +36,8 @@ abstract class InlineQueryResult extends Object
         $className = self::className();
         $baseName = StringHelper::basename($className);
 
-        $mainName = 'InlineQueryResult';
-        $replaces = [$mainName, $mainName . 'Cached'];
-        $replaced = str_replace($replaces, '', $baseName);
+        $mainName = 'InputMedia';
+        $replaced = str_replace($mainName, '', $baseName);
 
         $correctType = Inflector::camel2id($replaced, '_');
         return $correctType;

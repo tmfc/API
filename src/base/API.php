@@ -27,6 +27,7 @@ use api\method\deleteWebhook;
 use api\method\sendVideoNote;
 use api\method\getStickerSet;
 use api\method\getChatMember;
+use api\method\sendMediaGroup;
 use api\method\forwardMessage;
 use api\method\pinChatMessage;
 use api\method\getWebhookInfo;
@@ -64,12 +65,12 @@ use api\method\stopMessageLiveLocation;
  * @link https://core.telegram.org/bots/api
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @since 3.5
  */
 class API extends Object
 {
 
-    const VERSION = '3.4';
+    const VERSION = '3.5';
     const EVENT_AFTER_SEND = 'AfterSend';
     const EVENT_BEFORE_SEND = 'BeforeSend';
     const EVENT_REQUEST_FAILED = 'RequestFailed';
@@ -136,7 +137,7 @@ class API extends Object
      * @param array $params
      * @return getUpdates
      */
-    public function getUpdates(array $params = [])
+    public function getUpdates($params = [])
     {
         return new getUpdates($this->token, $params);
     }
@@ -172,7 +173,7 @@ class API extends Object
      * @param array $params
      * @return setWebhook
      */
-    public function setWebhook(array $params = [])
+    public function setWebhook($params = [])
     {
         return new setWebhook($this->token, $params);
     }
@@ -229,7 +230,7 @@ class API extends Object
      * @param array $params
      * @return sendMessage
      */
-    public function sendMessage(array $params = [])
+    public function sendMessage($params = [])
     {
         return new sendMessage($this->token, $params);
     }
@@ -243,7 +244,7 @@ class API extends Object
      * @param array $params
      * @return forwardMessage
      */
-    public function forwardMessage(array $params = [])
+    public function forwardMessage($params = [])
     {
         return new forwardMessage($this->token, $params);
     }
@@ -257,7 +258,7 @@ class API extends Object
      * @param array $params
      * @return sendPhoto
      */
-    public function sendPhoto(array $params = [])
+    public function sendPhoto($params = [])
     {
         return new sendPhoto($this->token, $params);
     }
@@ -276,7 +277,7 @@ class API extends Object
      * @param array $params
      * @return sendAudio
      */
-    public function sendAudio(array $params = [])
+    public function sendAudio($params = [])
     {
         return new sendAudio($this->token, $params);
     }
@@ -291,7 +292,7 @@ class API extends Object
      * @param array $params
      * @return sendDocument
      */
-    public function sendDocument(array $params = [])
+    public function sendDocument($params = [])
     {
         return new sendDocument($this->token, $params);
     }
@@ -307,7 +308,7 @@ class API extends Object
      * @param array $params
      * @return sendVideo
      */
-    public function sendVideo(array $params = [])
+    public function sendVideo($params = [])
     {
         return new sendVideo($this->token, $params);
     }
@@ -325,7 +326,7 @@ class API extends Object
      * @param array $params
      * @return sendVoice
      */
-    public function sendVoice(array $params = [])
+    public function sendVoice($params = [])
     {
         return new sendVoice($this->token, $params);
     }
@@ -340,11 +341,25 @@ class API extends Object
      * @param array $params
      * @return sendVideoNote
      */
-    public function sendVideoNote(array $params = [])
+    public function sendVideoNote($params = [])
     {
         return new sendVideoNote($this->token, $params);
     }
 
+    /**
+     * sendMediaGroup
+     * Use this method to send a group of photos or videos as an album.
+     * On success, an array of the sent Messages is returned.
+     *
+     * @see https://core.telegram.org/bots/api#sendmediagroup
+     * @param array $params
+     * @return sendMediaGroup
+     */
+    public function sendMediaGroup($params = [])
+    {
+        return new sendMediaGroup($this->token, $params);
+    }
+    
     /**
      * sendLocation
      * Use this method to send point on the map. On success,
@@ -354,7 +369,7 @@ class API extends Object
      * @param array $params
      * @return sendLocation
      */
-    public function sendLocation(array $params = [])
+    public function sendLocation($params = [])
     {
         return new sendLocation($this->token, $params);
     }
@@ -374,7 +389,7 @@ class API extends Object
      * @param array $params
      * @return editMessageLiveLocation
      */
-    public function editMessageLiveLocation(array $params = [])
+    public function editMessageLiveLocation($params = [])
     {
         return new editMessageLiveLocation($this->token, $params);
     }
@@ -391,7 +406,7 @@ class API extends Object
      * @param array $params
      * @return stopMessageLiveLocation
      */
-    public function stopMessageLiveLocation(array $params = [])
+    public function stopMessageLiveLocation($params = [])
     {
         return new stopMessageLiveLocation($this->token, $params);
     }
@@ -405,7 +420,7 @@ class API extends Object
      * @param array $params
      * @return sendVenue
      */
-    public function sendVenue(array $params = [])
+    public function sendVenue($params = [])
     {
         return new sendVenue($this->token, $params);
     }
@@ -419,7 +434,7 @@ class API extends Object
      * @param array $params
      * @return sendContact
      */
-    public function sendContact(array $params = [])
+    public function sendContact($params = [])
     {
         return new sendContact($this->token, $params);
     }
@@ -444,7 +459,7 @@ class API extends Object
      * @param array $params
      * @return sendChatAction
      */
-    public function sendChatAction(array $params = [])
+    public function sendChatAction($params = [])
     {
         return new sendChatAction($this->token, $params);
     }
@@ -458,7 +473,7 @@ class API extends Object
      * @param array $params
      * @return getUserProfilePhotos
      */
-    public function getUserProfilePhotos(array $params = [])
+    public function getUserProfilePhotos($params = [])
     {
         return new getUserProfilePhotos($this->token, $params);
     }
@@ -482,7 +497,7 @@ class API extends Object
      * @param array $params
      * @return getFile
      */
-    public function getFile(array $params = [])
+    public function getFile($params = [])
     {
         return new getFile($this->token, $params);
     }
@@ -505,7 +520,7 @@ class API extends Object
      * @param array $params
      * @return kickChatMember
      */
-    public function kickChatMember(array $params = [])
+    public function kickChatMember($params = [])
     {
         return new kickChatMember($this->token, $params);
     }
@@ -522,7 +537,7 @@ class API extends Object
      * @param array $params
      * @return unbanChatMember
      */
-    public function unbanChatMember(array $params = [])
+    public function unbanChatMember($params = [])
     {
         return new unbanChatMember($this->token, $params);
     }
@@ -539,7 +554,7 @@ class API extends Object
      * @param array $params
      * @return restrictChatMember
      */
-    public function restrictChatMember(array $params = [])
+    public function restrictChatMember($params = [])
     {
         return new restrictChatMember($this->token, $params);
     }
@@ -555,7 +570,7 @@ class API extends Object
      * @param array $params
      * @return promoteChatMember
      */
-    public function promoteChatMember(array $params = [])
+    public function promoteChatMember($params = [])
     {
         return new promoteChatMember($this->token, $params);
     }
@@ -571,7 +586,7 @@ class API extends Object
      * @param array $params
      * @return exportChatInviteLink
      */
-    public function exportChatInviteLink(array $params = [])
+    public function exportChatInviteLink($params = [])
     {
         return new exportChatInviteLink($this->token, $params);
     }
@@ -591,7 +606,7 @@ class API extends Object
      * @param array $params
      * @return setChatPhoto
      */
-    public function setChatPhoto(array $params = [])
+    public function setChatPhoto($params = [])
     {
         return new setChatPhoto($this->token, $params);
     }
@@ -611,7 +626,7 @@ class API extends Object
      * @param array $params
      * @return deleteChatPhoto
      */
-    public function deleteChatPhoto(array $params = [])
+    public function deleteChatPhoto($params = [])
     {
         return new deleteChatPhoto($this->token, $params);
     }
@@ -631,7 +646,7 @@ class API extends Object
      * @param array $params
      * @return setChatTitle
      */
-    public function setChatTitle(array $params = [])
+    public function setChatTitle($params = [])
     {
         return new setChatTitle($this->token, $params);
     }
@@ -647,7 +662,7 @@ class API extends Object
      * @param array $params
      * @return setChatDescription
      */
-    public function setChatDescription(array $params = [])
+    public function setChatDescription($params = [])
     {
         return new setChatDescription($this->token, $params);
     }
@@ -662,7 +677,7 @@ class API extends Object
      * @param array $params
      * @return pinChatMessage
      */
-    public function pinChatMessage(array $params = [])
+    public function pinChatMessage($params = [])
     {
         return new pinChatMessage($this->token, $params);
     }
@@ -677,7 +692,7 @@ class API extends Object
      * @param array $params
      * @return unpinChatMessage
      */
-    public function unpinChatMessage(array $params = [])
+    public function unpinChatMessage($params = [])
     {
         return new unpinChatMessage($this->token, $params);
     }
@@ -691,7 +706,7 @@ class API extends Object
      * @param array $params
      * @return leaveChat
      */
-    public function leaveChat(array $params = [])
+    public function leaveChat($params = [])
     {
         return new leaveChat($this->token, $params);
     }
@@ -706,7 +721,7 @@ class API extends Object
      * @param array $params
      * @return getChat
      */
-    public function getChat(array $params = [])
+    public function getChat($params = [])
     {
         return new getChat($this->token, $params);
     }
@@ -723,7 +738,7 @@ class API extends Object
      * @param array $params
      * @return getChatAdministrators
      */
-    public function getChatAdministrators(array $params = [])
+    public function getChatAdministrators($params = [])
     {
         return new getChatAdministrators($this->token, $params);
     }
@@ -737,7 +752,7 @@ class API extends Object
      * @param array $params
      * @return getChatMembersCount
      */
-    public function getChatMembersCount(array $params = [])
+    public function getChatMembersCount($params = [])
     {
         return new getChatMembersCount($this->token, $params);
     }
@@ -751,7 +766,7 @@ class API extends Object
      * @param array $params
      * @return getChatMember
      */
-    public function getChatMember(array $params = [])
+    public function getChatMember($params = [])
     {
         return new getChatMember($this->token, $params);
     }
@@ -772,7 +787,7 @@ class API extends Object
      * @param array $params
      * @return answerCallbackQuery
      */
-    public function answerCallbackQuery(array $params = [])
+    public function answerCallbackQuery($params = [])
     {
         return new answerCallbackQuery($this->token, $params);
     }
@@ -787,7 +802,7 @@ class API extends Object
      * @param array $params
      * @return editMessageText
      */
-    public function editMessageText(array $params = [])
+    public function editMessageText($params = [])
     {
         return new editMessageText($this->token, $params);
     }
@@ -802,7 +817,7 @@ class API extends Object
      * @param array $params
      * @return editMessageCaption
      */
-    public function editMessageCaption(array $params = [])
+    public function editMessageCaption($params = [])
     {
         return new editMessageCaption($this->token, $params);
     }
@@ -818,7 +833,7 @@ class API extends Object
      * @param array $params
      * @return editMessageReplyMarkup
      */
-    public function editMessageReplyMarkup(array $params = [])
+    public function editMessageReplyMarkup($params = [])
     {
         return new editMessageReplyMarkup($this->token, $params);
     }
@@ -837,7 +852,7 @@ class API extends Object
      * @param array $params
      * @return deleteMessage
      */
-    public function deleteMessage(array $params = [])
+    public function deleteMessage($params = [])
     {
         return new deleteMessage($this->token, $params);
     }
@@ -851,7 +866,7 @@ class API extends Object
      * @param array $params
      * @return sendSticker
      */
-    public function sendSticker(array $params = [])
+    public function sendSticker($params = [])
     {
         return new sendSticker($this->token, $params);
     }
@@ -865,7 +880,7 @@ class API extends Object
      * @param array $params
      * @return getStickerSet
      */
-    public function getStickerSet(array $params = [])
+    public function getStickerSet($params = [])
     {
         return new getStickerSet($this->token, $params);
     }
@@ -880,7 +895,7 @@ class API extends Object
      * @param array $params
      * @return uploadStickerFile
      */
-    public function uploadStickerFile(array $params = [])
+    public function uploadStickerFile($params = [])
     {
         return new uploadStickerFile($this->token, $params);
     }
@@ -895,7 +910,7 @@ class API extends Object
      * @param array $params
      * @return createNewStickerSet
      */
-    public function createNewStickerSet(array $params = [])
+    public function createNewStickerSet($params = [])
     {
         return new createNewStickerSet($this->token, $params);
     }
@@ -909,7 +924,7 @@ class API extends Object
      * @param array $params
      * @return addStickerToSet
      */
-    public function addStickerToSet(array $params = [])
+    public function addStickerToSet($params = [])
     {
         return new addStickerToSet($this->token, $params);
     }
@@ -923,7 +938,7 @@ class API extends Object
      * @param array $params
      * @return setStickerPositionInSet
      */
-    public function setStickerPositionInSet(array $params = [])
+    public function setStickerPositionInSet($params = [])
     {
         return new setStickerPositionInSet($this->token, $params);
     }
@@ -937,7 +952,7 @@ class API extends Object
      * @param array $params
      * @return deleteStickerFromSet
      */
-    public function deleteStickerFromSet(array $params = [])
+    public function deleteStickerFromSet($params = [])
     {
         return new deleteStickerFromSet($this->token, $params);
     }
@@ -953,7 +968,7 @@ class API extends Object
      * @param array $params
      * @return answerInlineQuery
      */
-    public function answerInlineQuery(array $params = [])
+    public function answerInlineQuery($params = [])
     {
         return new answerInlineQuery($this->token, $params);
     }
@@ -967,7 +982,7 @@ class API extends Object
      * @param array $params
      * @return sendInvoice
      */
-    public function sendInvoice(array $params = [])
+    public function sendInvoice($params = [])
     {
         return new sendInvoice($this->token, $params);
     }
@@ -983,7 +998,7 @@ class API extends Object
      * @param array $params
      * @return answerShippingQuery
      */
-    public function answerShippingQuery(array $params = [])
+    public function answerShippingQuery($params = [])
     {
         return new answerShippingQuery($this->token, $params);
     }
@@ -1000,7 +1015,7 @@ class API extends Object
      * @param array $params
      * @return answerPreCheckoutQuery
      */
-    public function answerPreCheckoutQuery(array $params = [])
+    public function answerPreCheckoutQuery($params = [])
     {
         return new answerPreCheckoutQuery($this->token, $params);
     }
@@ -1014,7 +1029,7 @@ class API extends Object
      * @param array $params
      * @return sendGame
      */
-    public function sendGame(array $params = [])
+    public function sendGame($params = [])
     {
         return new sendGame($this->token, $params);
     }
@@ -1030,7 +1045,7 @@ class API extends Object
      * @param array $params
      * @return setGameScore
      */
-    public function setGameScore(array $params = [])
+    public function setGameScore($params = [])
     {
         return new setGameScore($this->token, $params);
     }
@@ -1050,7 +1065,7 @@ class API extends Object
      * @param array $params
      * @return getGameHighScores
      */
-    public function getGameHighScores(array $params = [])
+    public function getGameHighScores($params = [])
     {
         return new getGameHighScores($this->token, $params);
     }

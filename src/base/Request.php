@@ -2,13 +2,15 @@
 
 use api\InputFile;
 use yii\helpers\Json;
+use api\media\InputMedia;
+use yii\helpers\ArrayHelper as AH;
 
 /**
  * Class Request
  * @package api\base
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @since 3.5
  */
 class Request extends Object
 {
@@ -95,6 +97,25 @@ class Request extends Object
         $params = [];
         foreach ($this->__array() as $key => $value) {
             if (is_array($value)) {
+                if (AH::isIndexed($value)) {
+                    $valueObj = $this->get($key);
+                    foreach ($valueObj as $index => $item) {
+                        if (
+                            $item instanceof InputMedia &&
+                            $item->media instanceof InputFile
+                        ) {
+                            $fileName = $item->media->getFilename();
+                            $id = 'file_' . md5($fileName);
+
+                            $field = $item->__array();
+                            $field['media'] = 'attach://' . $id;
+
+                            $value[$index] = $field;
+                            $params[$id] = $item->media;
+                        }
+                    }
+                }
+
                 $params[$key] = Json::encode($value);
                 continue;
             }
@@ -113,11 +134,17 @@ class Request extends Object
      */
     private function hasFile()
     {
-        foreach ($this->properties as $param) {
-            if ($param instanceof InputFile)
-                return true;
-        }
+        $exist = false;
+        $params = $this->__array();
+        array_walk_recursive($params,
+            function ($param) use (&$exist) {
+                if ($param instanceof InputFile)
+                    $exist = true;
 
-        return false;
+                var_dump($param);
+            }
+        );
+
+        return $exist;
     }
 }

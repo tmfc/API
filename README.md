@@ -1,4 +1,4 @@
-# API [![Yii2](https://img.shields.io/badge/framework-yii2-green.svg?style=for-the-badge)](http://www.yiiframework.com/) [![Download](https://img.shields.io/packagist/dt/botstan/API.svg?style=for-the-badge)](https://github.com/botstan/API) [![Version](https://img.shields.io/badge/version-V3.4-blue.svg?style=for-the-badge)](https://packagist.org/packages/botstan/API) [![Stars](https://img.shields.io/github/stars/botstan/API.svg?style=for-the-badge&label=Like)](https://github.com/botstan/API)
+# API [![Yii2](https://img.shields.io/badge/framework-yii2-green.svg?style=for-the-badge)](http://www.yiiframework.com/) [![Download](https://img.shields.io/packagist/dt/botstan/API.svg?style=for-the-badge)](https://github.com/botstan/API) [![Version](https://img.shields.io/badge/version-V3.5-blue.svg?style=for-the-badge)](https://packagist.org/packages/botstan/API) [![Stars](https://img.shields.io/github/stars/botstan/API.svg?style=for-the-badge&label=Like)](https://github.com/botstan/API)
 The Bot API is an HTTP-based interface created for developers keen on building bots for Telegram.
 > To learn how to create and set up a bot, please consult our [Introduction to Bots](https://core.telegram.org/bots) and [Bot FAQ](https://core.telegram.org/bots/faq).
 
@@ -94,6 +94,36 @@ $file = new InputFile('@webroot/favicon.ico');
 $response = $api->sendPhoto()
     ->setChatId('<chat_id>')
     ->setPhoto($file)
+    ->send();
+
+if ($response instanceof Error) {
+    // request failed
+}
+```
+
+### InputMedia
+This object represents the content of a media message to be sent.
+```php
+use api\InputFile;
+use api\response\Error;
+use api\method\sendMediaGroup;
+use api\media\InputMediaPhoto;
+
+$album[] = (new InputMediaPhoto())
+    ->setCaption('sent by file id')
+    ->setMedia('AgADBAADg6sxG8UOyFB7g58NMLgVu-tA9RkABE');
+
+$album[] = (new InputMediaPhoto())
+    ->setCaption('sent by url')
+    ->setMedia('http://example.com/photos/dogs.jpg');
+
+$album[] = (new InputMediaPhoto())
+    ->setCaption('sent by InputFile')
+    ->setMedia(new InputFile('@photos/cats.jpg'));
+
+$response = (new sendMediaGroup('<token>'))
+    ->setChatId('<chat_id>')
+    ->setMedia($album)
     ->send();
 
 if ($response instanceof Error) {

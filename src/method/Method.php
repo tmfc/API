@@ -19,7 +19,7 @@ use yii\base\UnknownClassException;
  * @link https://core.telegram.org/bots/api#available-methods
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @since 3.5
  */
 abstract class Method extends Request
 {
@@ -107,7 +107,7 @@ abstract class Method extends Request
     {
         if (AH::isAssociative($properties)) {
             $class = new $className($properties);
-            if ($class instanceof Object) {
+            if ($class instanceof Response) {
                 return $class;
             }
 

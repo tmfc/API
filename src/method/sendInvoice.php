@@ -11,7 +11,7 @@ use api\keyboard\InlineKeyboardMarkup;
  * @link https://core.telegram.org/bots/api#sendinvoice
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @since 3.5
  *
  * @property int chat_id
  * @property string title
@@ -21,6 +21,7 @@ use api\keyboard\InlineKeyboardMarkup;
  * @property string start_parameter
  * @property string currency
  * @property LabeledPrice[] prices
+ * @property string provider_data
  * @property string photo_url
  * @property int photo_size
  * @property int photo_width
@@ -43,6 +44,7 @@ use api\keyboard\InlineKeyboardMarkup;
  * @method bool hasStartParameter()
  * @method bool hasCurrency()
  * @method bool hasPrices()
+ * @method bool hasProviderData()
  * @method bool hasPhotoUrl()
  * @method bool hasPhotoSize()
  * @method bool hasPhotoWidth()
@@ -63,6 +65,7 @@ use api\keyboard\InlineKeyboardMarkup;
  * @method $this setStartParameter($string)
  * @method $this setCurrency($string)
  * @method $this setPrices($array)
+ * @method $this setProviderData($string)
  * @method $this setPhotoUrl($string)
  * @method $this setPhotoSize($integer)
  * @method $this setPhotoWidth($integer)
@@ -83,6 +86,7 @@ use api\keyboard\InlineKeyboardMarkup;
  * @method $this remStartParameter()
  * @method $this remCurrency()
  * @method $this remPrices()
+ * @method $this remProviderData()
  * @method $this remPhotoUrl()
  * @method $this remPhotoSize()
  * @method $this remPhotoWidth()
@@ -103,6 +107,7 @@ use api\keyboard\InlineKeyboardMarkup;
  * @method string getStartParameter($default = null)
  * @method string getCurrency($default = null)
  * @method LabeledPrice[] getPrices($default = null)
+ * @method string getProviderData($default = null)
  * @method string getPhotoUrl($default = null)
  * @method int getPhotoSize($default = null)
  * @method int getPhotoWidth($default = null)

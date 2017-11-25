@@ -8,7 +8,7 @@ use api\response\Error;
  * @link https://core.telegram.org/bots/api#unbanchatmember
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @since 3.5
  *
  * @property int|string chat_id
  * @property int user_id

@@ -6,7 +6,7 @@
  * @link https://core.telegram.org/bots/api#message
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @since 3.5
  *
  * @property int message_id
  * @property User from
@@ -19,6 +19,7 @@
  * @property int forward_date
  * @property Message reply_to_message
  * @property int edit_date
+ * @property string media_group_id
  * @property string author_signature
  * @property string text
  * @property MessageEntity[] entities
@@ -57,6 +58,7 @@
  * @method bool hasForwardDate()
  * @method bool hasReplyToMessage()
  * @method bool hasEditDate()
+ * @method bool hasMediaGroupId()
  * @method bool hasAuthorSignature()
  * @method bool hasText()
  * @method bool hasEntities()
@@ -98,6 +100,7 @@
  * @method int getForwardDate($default = null)
  * @method Message getReplyToMessage($default = null)
  * @method int getEditDate($default = null)
+ * @method string getMediaGroupId($default = null)
  * @method string getAuthorSignature($default = null)
  * @method string getText($default = null)
  * @method MessageEntity[] getEntities($default = null)
