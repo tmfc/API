@@ -1,0 +1,33 @@
+{
+    "license": "MIT",
+    "name": "botstan/api",
+    "type": "yii2-extension",
+    "minimum-stability": "stable",
+    "description": "Use telegram bot api easily.",
+    "keywords": ["yii2","extension","telegram","bot","api"],
+    "authors": [
+        {
+            "name": "Mehdi Khodayari Khoram",
+            "email": "khodayari.khoram@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/botstan/API/issues",
+        "source": "https://github.com/botstan/API"
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "yiisoft/yii2": ">=2.0.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "api\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
