@@ -68,7 +68,7 @@ class InlineKeyboardMarkup extends Keyboard
             $keyboard = $this->inline_keyboard;
 
             if (is_int($row))
-                $index = $row > 0 ? $row - 1 : 0;
+                $index = $row > 0 ? $row : 0;
 
             else if ($row == null && sizeof($keyboard) > 0)
                 $index = sizeof($keyboard) - 1;
