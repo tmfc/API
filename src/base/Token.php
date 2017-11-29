@@ -8,7 +8,7 @@ use api\exceptions\InvalidTokenException;
  * @package api\base
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5.3
+ * @since 3.5.4
  *
  * @property int id
  * @property string key
@@ -49,7 +49,7 @@ class Token extends Object
      */
     public function __toString()
     {
-        return $this->_id . $this->_key;
+        return $this->_id . ':' . $this->_key;
     }
 
     /**
