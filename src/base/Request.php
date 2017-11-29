@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper as AH;
  * @package api\base
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5
+ * @since 3.5.3
  */
 class Request extends Object
 {
@@ -18,18 +18,21 @@ class Request extends Object
     const SERVER = 'api.telegram.org';
 
     /**
-     * @var string
+     * @var Token
      */
     protected $token;
 
     /**
      * Request constructor.
-     * @param string $token
+     * @param string|Token $token
      * @param array $params
      */
     public function __construct($token, $params = [])
     {
-        $this->token = $token;
+        if (!($token instanceof Token)) {
+            $this->token = new Token($token);
+        }
+
         parent::__construct($params);
     }
 

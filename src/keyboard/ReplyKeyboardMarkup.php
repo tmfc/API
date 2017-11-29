@@ -8,7 +8,7 @@ use api\keyboard\button\KeyboardButton;
  * @link https://core.telegram.org/bots/api#replykeyboardmarkup
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @since 3.5.2
  *
  * @property array keyboard
  * @property bool resize_keyboard
@@ -83,7 +83,7 @@ class ReplyKeyboardMarkup extends Keyboard
             $keyboard = $this->keyboard;
 
             if (is_int($row))
-                $index = $row > 0 ? $row  : 0;
+                $index = $row > 0 ? $row : 0;
 
             else if ($row == null && sizeof($keyboard) > 0)
                 $index = sizeof($keyboard) - 1;

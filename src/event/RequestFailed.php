@@ -1,5 +1,6 @@
 <?php namespace api\event;
 
+use api\base\Token;
 use yii\base\Event;
 use api\method\Method;
 use api\response\Error;
@@ -9,13 +10,13 @@ use api\response\Error;
  * @package api\event
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @since 3.5.3
  */
 class RequestFailed extends Event
 {
 
     /**
-     * @var string
+     * @var Token
      */
     public $token;
 

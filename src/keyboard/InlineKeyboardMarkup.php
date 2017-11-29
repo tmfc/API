@@ -8,7 +8,7 @@ use api\keyboard\button\InlineKeyboardButton;
  * @link https://core.telegram.org/bots/api#inlinekeyboardmarkup
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @since 3.5.2
  *
  * @property array inline_keyboard
  *

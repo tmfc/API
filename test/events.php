@@ -16,11 +16,9 @@ use yii\helpers\ArrayHelper as AH;
  */
 API::on(API::EVENT_REQUEST_FAILED, function (RequestFailed $event) {
     $token = $event->token;
-    $id = explode(':', $token)[0];
-
     $error = $event->error;
     if ($error instanceof Error) {
-        $info = '[' . $id . '][' . $error->error_code . ']';
+        $info = '[' . $token->id . '][' . $error->error_code . ']';
         $message = $info . ' ' . $error->description;
 
         Yii::warning($message, 'bot');
@@ -34,10 +32,8 @@ API::on(API::EVENT_REQUEST_FAILED, function (RequestFailed $event) {
  */
 API::on(API::EVENT_BEFORE_SEND, function (BeforeSend $event) {
     $token = $event->token;
-    $id = explode(':', $token)[0];
-
     $cache = Yii::$app->cache;
-    $cId = 'BOT:' . $id . ':';
+    $cId = 'BOT:' . $token->id . ':';
 
     $method = $event->method;
     $params = $method->__array();
@@ -69,10 +65,8 @@ API::on(API::EVENT_BEFORE_SEND, function (BeforeSend $event) {
  */
 API::on(API::EVENT_REQUEST_SUCCEED, function (RequestSucceed $event) {
     $token = $event->token;
-    $id = explode(':', $token)[0];
-
     $cache = Yii::$app->cache;
-    $cId = 'BOT:' . $id . ':';
+    $cId = 'BOT:' . $token->id . ':';
 
     $method = $event->method;
     $result = $event->result;

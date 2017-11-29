@@ -1,6 +1,7 @@
 <?php
 
 use api\InputFile;
+use api\response\Error;
 use api\method\sendMediaGroup;
 use api\media\InputMediaPhoto;
 
@@ -23,3 +24,7 @@ $response = (new sendMediaGroup('<token>'))
     ->setChatId('<chat_id>')
     ->setMedia($album)
     ->send();
+
+if ($response instanceof Error) {
+    // request failed
+}

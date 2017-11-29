@@ -104,7 +104,7 @@ class BotController extends Controller
 
             case 'Hi':
             case 'Hello':
-				$this->helloCommand($message);
+                $this->helloCommand($message);
                 break;
 
             default:
