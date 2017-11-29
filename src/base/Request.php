@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper as AH;
  * @package api\base
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5.3
+ * @since 3.5.5
  */
 class Request extends Object
 {
@@ -29,6 +29,7 @@ class Request extends Object
      */
     public function __construct($token, $params = [])
     {
+        $this->token = $token;
         if (!($token instanceof Token)) {
             $this->token = new Token($token);
         }

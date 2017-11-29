@@ -65,12 +65,12 @@ use api\method\stopMessageLiveLocation;
  * @link https://core.telegram.org/bots/api
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5.3
+ * @since 3.5.5
  */
 class API extends Object
 {
 
-    const VERSION = '3.5.3';
+    const VERSION = '3.5.5';
     const EVENT_AFTER_SEND = 'AfterSend';
     const EVENT_BEFORE_SEND = 'BeforeSend';
     const EVENT_REQUEST_FAILED = 'RequestFailed';
@@ -119,6 +119,7 @@ class API extends Object
      */
     public function __construct($token)
     {
+        $this->token = $token;
         if (!($token instanceof Token)) {
             $this->token = new Token($token);
         }

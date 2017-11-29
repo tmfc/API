@@ -1,6 +1,5 @@
 <?php namespace api\base;
 
-use yii\base\Object;
 use api\exceptions\InvalidTokenException;
 
 /**
@@ -8,12 +7,12 @@ use api\exceptions\InvalidTokenException;
  * @package api\base
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5.4
+ * @since 3.5.5
  *
  * @property int id
  * @property string key
  */
-class Token extends Object
+class Token extends \yii\base\Object
 {
 
     const PATTERN = '/(\d+)\:(.*)/';
