@@ -12,7 +12,7 @@ use yii\helpers\StringHelper;
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
  * @since 3.5
  *
- * @property string $id
+ * @property string id
  *
  * @method bool hasId()
  * @method $this setId($string)
