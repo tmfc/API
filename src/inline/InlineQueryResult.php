@@ -18,7 +18,6 @@ use yii\helpers\StringHelper;
  * @method $this setId($string)
  * @method $this remId()
  * @method string getId($default = null)
- *
  */
 abstract class InlineQueryResult extends Object
 {
