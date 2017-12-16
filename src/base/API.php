@@ -65,12 +65,12 @@ use api\method\stopMessageLiveLocation;
  * @link https://core.telegram.org/bots/api
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5.5
+ * @since 3.5.6
  */
 class API extends Object
 {
 
-    const VERSION = '3.5.5';
+    const VERSION = '3.5.6';
     const EVENT_AFTER_SEND = 'AfterSend';
     const EVENT_BEFORE_SEND = 'BeforeSend';
     const EVENT_REQUEST_FAILED = 'RequestFailed';

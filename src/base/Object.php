@@ -10,7 +10,7 @@ use yii\base\InvalidParamException;
  * @package api\base
  *
  * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @since 3.5.6
  */
 class Object extends \yii\base\Object
 {
@@ -44,7 +44,15 @@ class Object extends \yii\base\Object
     public function __array()
     {
         $properties = $this->properties;
-        return $this->toArray($properties);
+        array_walk_recursive(
+            $properties, function (&$value) {
+                if ($value instanceof Object) {
+                    $value = $value->__array();
+                }
+            }
+        );
+
+        return $properties;
     }
 
     /**
@@ -154,28 +162,5 @@ class Object extends \yii\base\Object
         }
 
         return $this;
-    }
-
-    /**
-     * @param array $fields
-     * @return array
-     */
-    private function toArray($fields = [])
-    {
-        $output = [];
-        foreach ($fields as $key => $value) {
-            if ($value instanceof Object) {
-                $output[$key] = $value->__array();
-                continue;
-            }
-            elseif (is_array($value)) {
-                $output[$key] = $this->toArray($value);
-                continue;
-            }
-
-            $output[$key] = $value;
-        }
-
-        return $output;
     }
 }
