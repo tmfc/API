@@ -1,11 +1,8 @@
 <?php namespace api\media;
 
 /**
- * Class InputMediaVideo
- * @package api\media
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property int width
  * @property int height

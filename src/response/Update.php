@@ -1,12 +1,8 @@
 <?php namespace api\response;
 
 /**
- * Class Update
- * @package api\response
- * @link https://core.telegram.org/bots/api#update
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property int update_id
  * @property Message message
@@ -43,65 +39,9 @@ class Update extends Response
 {
 
     /**
-     * @return Chat|null
-     */
-    public function getChat()
-    {
-        if ($this->hasMessage()) {
-            return $this->message->chat;
-        }
-        if ($this->hasChannelPost()) {
-            return $this->channel_post->chat;
-        }
-        if ($this->hasEditedMessage()) {
-            return $this->edited_message->chat;
-        }
-        if ($this->hasEditedChannelPost()) {
-            return $this->edited_channel_post->chat;
-        }
-
-        return null;
-    }
-
-    /**
-     * @return User|null
-     */
-    public function getFrom()
-    {
-        if ($this->hasMessage()) {
-            return $this->message->from;
-        }
-        if ($this->hasChannelPost()) {
-            return $this->channel_post->from;
-        }
-        if ($this->hasInlineQuery()) {
-            return $this->inline_query->from;
-        }
-        if ($this->hasCallbackQuery()) {
-            return $this->callback_query->from;
-        }
-        if($this->hasChosenInlineResult()) {
-            return $this->chosen_inline_result->from;
-        }
-        if ($this->hasEditedMessage()) {
-            return $this->edited_message->from;
-        }
-        if ($this->hasEditedChannelPost()) {
-            return $this->edited_channel_post->from;
-        }
-        if ($this->hasShippingQuery()) {
-            return $this->shipping_query->from;
-        }
-        if ($this->hasPreCheckoutQuery()) {
-            return $this->pre_checkout_query->from;
-        }
-
-        return null;
-    }
-
-    /**
-     * Every object have relations with other object,
-     * in this method we introduce all object we have relations.
+     * Response can have relations with other objects,
+     * in this method we introduce all objects this object
+     * have relations.
      *
      * @return array of objects
      */

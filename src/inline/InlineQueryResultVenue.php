@@ -4,12 +4,8 @@ use api\input\InputMessageContent;
 use api\keyboard\InlineKeyboardMarkup;
 
 /**
- * Class InlineQueryResultVenue
- * @package api\inline
- * @link https://core.telegram.org/bots/api#inlinequeryresultvenue
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property float latitude
  * @property float longitude

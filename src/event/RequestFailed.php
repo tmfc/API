@@ -6,11 +6,8 @@ use api\method\Method;
 use api\response\Error;
 
 /**
- * Class RequestFailed
- * @package api\event
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5.3
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  */
 class RequestFailed extends Event
 {

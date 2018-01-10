@@ -1,12 +1,8 @@
 <?php namespace api\input;
 
 /**
- * Class InputContactMessageContent
- * @package api\input
- * @link https://core.telegram.org/bots/api#inputcontactmessagecontent
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string phone_number
  * @property string first_name

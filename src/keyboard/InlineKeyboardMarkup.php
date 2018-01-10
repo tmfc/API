@@ -3,12 +3,8 @@
 use api\keyboard\button\InlineKeyboardButton;
 
 /**
- * Class InlineKeyboardMarkup
- * @package api\keyboard
- * @link https://core.telegram.org/bots/api#inlinekeyboardmarkup
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5.2
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property array inline_keyboard
  *
@@ -21,30 +17,22 @@ class InlineKeyboardMarkup extends Keyboard
 {
 
     /**
-     * InlineKeyboardMarkup constructor.
-     * @param array $inlineKeyboard
-     */
-    public function __construct($inlineKeyboard = [])
-    {
-        $this->inline_keyboard = $inlineKeyboard;
-        parent::__construct();
-    }
-
-    /**
      * @param int $row
      * @param int $column
      * @return $this
      */
     public function deleteButton($row, $column = null)
     {
+        if (is_int($row)) $row--;
+        if (is_int($column)) $column--;
         if ($this->hasInlineKeyboard()) {
             $keyboard = $this->inline_keyboard;
-
-            if (is_int($row)) {
-                if (is_int($column))
-                    unset($keyboard[$row][$column]);
-                else
-                    unset($keyboard[$row]);
+            if ($column !== null &&
+                isset($keyboard[$row][$column])) {
+                unset($keyboard[$row][$column]);
+            }
+            elseif (isset($keyboard[$row])) {
+                unset($keyboard[$row]);
             }
 
             $this->inline_keyboard = $keyboard;
@@ -61,27 +49,28 @@ class InlineKeyboardMarkup extends Keyboard
      */
     public function addButton($button, $row = null, $column = null)
     {
-        $index = 0;
-        $keyboard = [];
+        if (is_int($row)) $row--;
+        if (is_int($column)) $column--;
+        if ($button instanceof InlineKeyboardButton) {
+            $keyboard = [];
+            if ($this->hasInlineKeyboard()) {
+                $keyboard = $this->inline_keyboard;
+                if ($row == null &&
+                    sizeof($keyboard) > 0) {
+                    $row = sizeof($keyboard) - 1;
+                }
+                if ($column == null &&
+                    sizeof($keyboard[$row]) > 0) {
+                    $column = sizeof($keyboard[$row]) - 1;
+                }
+            }
 
-        if ($this->hasInlineKeyboard()) {
-            $keyboard = $this->inline_keyboard;
-
-            if (is_int($row))
-                $index = $row > 0 ? $row : 0;
-
-            else if ($row == null && sizeof($keyboard) > 0)
-                $index = sizeof($keyboard) - 1;
-
-            else $index++;
+            if ($row == null) $row = 0;
+            if ($column == null) $column = 0;
+            $keyboard[$row][$column] = $button;
+            $this->inline_keyboard = $keyboard;
         }
 
-        if (is_int($column))
-            $keyboard[$index][$column] = $button;
-        else
-            $keyboard[$index][] = $button;
-
-        $this->inline_keyboard = $keyboard;
         return $this;
     }
 }

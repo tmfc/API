@@ -3,11 +3,8 @@
 use api\base\Object;
 
 /**
- * Class Button
- * @package api\keyboard\button
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  */
 class Button extends Object
 {

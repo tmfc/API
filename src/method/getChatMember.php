@@ -4,12 +4,8 @@ use api\response\Error;
 use api\response\ChatMember;
 
 /**
- * Class getChatMember
- * @package api\method
- * @link https://core.telegram.org/bots/api#getchatmember
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property int|string chat_id
  * @property int user_id
@@ -28,8 +24,10 @@ class getChatMember extends Method
 {
 
     /**
-     * every methods have a response.
-     * @return string the name of response class
+     * Every method have a response type,
+     * and in this method we will return a Response.
+     *
+     * @return string
      */
     protected function response()
     {

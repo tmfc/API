@@ -3,12 +3,8 @@
 use api\response\Error;
 
 /**
- * Class answerCallbackQuery
- * @package api\method
- * @link https://core.telegram.org/bots/api#answercallbackquery
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string callback_query_id
  * @property string text
@@ -42,8 +38,10 @@ class answerCallbackQuery extends Method
 {
 
     /**
-     * every methods have a response.
-     * @return string the name of response class
+     * Every method have a response type,
+     * and in this method we will return a Response.
+     *
+     * @return string
      */
     protected function response()
     {

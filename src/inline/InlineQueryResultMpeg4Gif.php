@@ -4,12 +4,8 @@ use api\input\InputMessageContent;
 use api\keyboard\InlineKeyboardMarkup;
 
 /**
- * Class InlineQueryResultMpeg4Gif
- * @package api\inline
- * @link https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string mpeg4_url
  * @property int mpeg4_width

@@ -4,12 +4,8 @@ use api\InputFile;
 use api\response\Error;
 
 /**
- * Class setWebhook
- * @package api\method
- * @link https://core.telegram.org/bots/api#setwebhook
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string url
  * @property InputFile certificate
@@ -38,8 +34,10 @@ class setWebhook extends Method
 {
 
     /**
-     * every methods have a response.
-     * @return string the name of response class
+     * Every method have a response type,
+     * and in this method we will return a Response.
+     *
+     * @return string
      */
     protected function response()
     {

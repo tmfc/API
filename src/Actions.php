@@ -7,12 +7,8 @@
  * from your bot, Telegram clients clear its typing
  * status).
  *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
- *
- * Class Actions
- * @package api
- * @link https://core.telegram.org/bots/api#sendchataction
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  */
 abstract class Actions
 {
@@ -46,7 +42,7 @@ abstract class Actions
      * @var string
      */
     const FIND_LOCATION = 'find_location';
-    
+
     /**
      * @var string
      */

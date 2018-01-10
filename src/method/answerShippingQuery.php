@@ -4,12 +4,8 @@ use api\response\Error;
 use api\response\ShippingOption;
 
 /**
- * Class answerShippingQuery
- * @package api\method
- * @link https://core.telegram.org/bots/api#answershippingquery
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string shipping_query_id
  * @property bool ok
@@ -38,8 +34,10 @@ class answerShippingQuery extends Method
 {
 
     /**
-     * Every method have a response type.
-     * @return string the class's name.
+     * Every method have a response type,
+     * and in this method we will return a Response.
+     *
+     * @return string
      */
     protected function response()
     {

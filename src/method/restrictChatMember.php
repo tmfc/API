@@ -3,12 +3,8 @@
 use api\response\Error;
 
 /**
- * Class restrictChatMember
- * @package api\method
- * @link https://core.telegram.org/bots/api#restrictchatmember
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property int|string chat_id
  * @property int user_id
@@ -52,8 +48,10 @@ class restrictChatMember extends Method
 {
 
     /**
-     * Every method have a response type.
-     * @return string the class's name.
+     * Every method have a response type,
+     * and in this method we will return a Response.
+     *
+     * @return string
      */
     protected function response()
     {

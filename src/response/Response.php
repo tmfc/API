@@ -5,12 +5,8 @@ use yii\helpers\ArrayHelper as AH;
 use yii\base\UnknownClassException;
 
 /**
- * Class Response
- * @package api\response
- * @link https://core.telegram.org/bots/api#available-types
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0
  */
 abstract class Response extends Object
 {
@@ -23,32 +19,32 @@ abstract class Response extends Object
     public function init()
     {
         $relations = $this->relations();
-        foreach ($relations as $property => $className) {
+        foreach ($relations as $param => $className) {
             if (
-                class_exists($className) &&
-                $this->__isset($property)
+                $this->__isset($param) &&
+                class_exists($className)
             ) {
-                $value = $this->__get($property);
-                $relation = $this->createRelation(
+                $value = $this->__get($param);
+                $relation = $this->createResponse(
                     $className, $value
                 );
 
-                // set property by relation
-                $this->__set($property, $relation);
+                // set param by relation
+                $this->__set($param, $relation);
             }
         }
     }
 
     /**
      * @param string $className
-     * @param array $properties
+     * @param array $params
      * @return array
      * @throws UnknownClassException
      */
-    private function createRelation($className, $properties)
+    private function createResponse($className, $params)
     {
-        if (AH::isAssociative($properties)) {
-            $class = new $className($properties);
+        if (AH::isAssociative($params)) {
+            $class = new $className($params);
             if ($class instanceof Response) {
                 return $class;
             }
@@ -57,10 +53,10 @@ abstract class Response extends Object
             throw new UnknownClassException($message);
         }
 
-        if (AH::isIndexed($properties)) {
+        if (AH::isIndexed($params)) {
             $output = [];
-            foreach ($properties as $index => $value) {
-                $output[$index] = $this->createRelation(
+            foreach ($params as $key => $value) {
+                $output[$key] = $this->createResponse(
                     $className, $value
                 );
             }
@@ -68,12 +64,13 @@ abstract class Response extends Object
             return $output;
         }
 
-        return $properties;
+        return $params;
     }
 
     /**
-     * Every object have relations with other object,
-     * in this method we introduce all object we have relations.
+     * Response can have relations with other objects,
+     * in this method we introduce all objects this object
+     * have relations.
      *
      * @return array of objects
      */

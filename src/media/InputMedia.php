@@ -2,16 +2,12 @@
 
 use api\InputFile;
 use api\base\Object;
-use yii\helpers\Inflector;
-use yii\helpers\StringHelper;
+use yii\helpers\Inflector as STR;
+use yii\helpers\StringHelper as SH;
 
 /**
- * Class InputMedia
- * @package api\media
- * @link https://core.telegram.org/bots/api#inputmedia
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string|InputFile media
  * @property string caption
@@ -33,14 +29,13 @@ abstract class InputMedia extends Object
      */
     public static function typeName()
     {
-        $className = self::className();
-        $baseName = StringHelper::basename($className);
-
-        $mainName = 'InputMedia';
-        $replaced = str_replace($mainName, '', $baseName);
-
-        $correctType = Inflector::camel2id($replaced, '_');
-        return $correctType;
+        return STR::camel2id(
+            str_replace(
+                'InputMedia', '',
+                SH::basename(self::className())
+            ),
+            '_'
+        );
     }
 
     /**
@@ -51,14 +46,5 @@ abstract class InputMedia extends Object
     public function init()
     {
         $this->__set('type', $this->typeName());
-        parent::init();
-    }
-
-    /**
-     * @param array $results
-     */
-    public function addTo(array &$results)
-    {
-        $results[] = $this;
     }
 }

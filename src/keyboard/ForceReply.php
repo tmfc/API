@@ -1,12 +1,8 @@
 <?php namespace api\keyboard;
 
 /**
- * Class ForceReply
- * @package api\keyboard
- * @link https://core.telegram.org/bots/api#forcereply
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property bool force_reply
  * @property bool selective
@@ -24,12 +20,12 @@ class ForceReply extends Keyboard
 {
 
     /**
-     * ForceReply constructor.
-     * @param array $properties
+     * Initializes the object.
+     * This method is invoked at the end of the constructor after
+     * the object is initialized with the given configuration.
      */
-    public function __construct(array $properties = [])
+    public function init()
     {
         $this->force_reply = true;
-        parent::__construct($properties);
     }
 }

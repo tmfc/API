@@ -3,12 +3,8 @@
 use api\base\Object;
 
 /**
- * Class InputMessageContent
- * @package api\input
- * @link https://core.telegram.org/bots/api#inputmessagecontent
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  */
 abstract class InputMessageContent extends Object
 {

@@ -1,12 +1,8 @@
 <?php namespace api\keyboard\button;
 
 /**
- * Class KeyboardButton
- * @package api\keyboard\button
- * @link https://core.telegram.org/bots/api#keyboardbutton
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string text
  * @property bool request_contact
@@ -27,18 +23,4 @@
  */
 class KeyboardButton extends Button
 {
-
-    /**
-     * KeyboardButton constructor.
-     * @param array|string $properties
-     */
-    public function __construct($properties = [])
-    {
-        if (is_string($properties)) {
-            $this->text = $properties;
-            $properties = [];
-        }
-
-        parent::__construct($properties);
-    }
 }

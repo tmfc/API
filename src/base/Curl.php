@@ -1,15 +1,14 @@
 <?php namespace api\base;
 
 use yii\helpers\Json;
-use yii\base\Exception;
 use yii\helpers\ArrayHelper as AH;
 
 /**
- * Class Curl
- * @package api\helpers
+ * The Curl is library for transferring data using
+ * various protocols.
  *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  */
 class Curl
 {
@@ -37,7 +36,7 @@ class Curl
         CURLOPT_CONNECTTIMEOUT => 30,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HEADER         => false,
-        CURLOPT_USERAGENT      => 'Botstan-Agent',
+        CURLOPT_USERAGENT      => 'botstan-api',
     ];
 
     /**
@@ -95,9 +94,8 @@ class Curl
      */
     public function getOption($key, $default = null)
     {
-        $os = $this->getOptions();
-        $value = AH::getValue($os, $key, $default);
-
+        $options = $this->getOptions();
+        $value = AH::getValue($options, $key, $default);
         return $value;
     }
 
@@ -106,9 +104,9 @@ class Curl
      */
     public function getOptions()
     {
-        $o = $this->_options;
-        $do = $this->_default_options;
-        return AH::merge($do, $o);
+        $options = $this->_options;
+        $default = $this->_default_options;
+        return AH::merge($options, $default);
     }
 
     /**
@@ -168,49 +166,46 @@ class Curl
      */
     public function send($method, $url, $raw = false)
     {
-        // method of request
+        // Method of request
         $method = strtoupper($method);
         $this->setOption(CURLOPT_CUSTOMREQUEST, $method);
 
-        // is head request
+        // Head request
         if ($method === 'HEAD') {
             $this->setOption(CURLOPT_NOBODY, true);
             $this->unsetOption(CURLOPT_WRITEFUNCTION);
         }
 
-        // create curl
-        $this->_curl = curl_init($url);
-        curl_setopt_array($this->_curl, $this->getOptions());
+        // Create curl
+        $curl = $this->_curl = curl_init($url);
+        curl_setopt_array($curl, $this->getOptions());
 
-        // sending request
-        $response = curl_exec($this->_curl);
+        // Sending request
+        $response = curl_exec($curl);
+        $this->error($response);
 
-        // debugging
+        // Debugging
         $code = CURLINFO_HTTP_CODE;
-        $this->__checkError($response);
-        $this->code = curl_getinfo($this->_curl, $code);
+        $this->code = curl_getinfo($curl, $code);
 
-        // result
+        // Result
         if ($method === 'HEAD') return true;
-        else {
-            $result = $raw ? Json::decode($response, true) : $response;
-            return $result;
-        }
+        return $raw ? Json::decode($response) : $response;
     }
 
     /**
-     * @param mixed $response
-     * @throws Exception
+     * @param $response
+     * @throws \Exception
      */
-    private function __checkError($response)
+    private function error($response)
     {
         if ($response === false) {
             $error = curl_errno($this->_curl);
-
             if ($error == 7) $this->code = 'timeout';
             else {
-                $message = 'Curl request failed: ' . curl_error($this->_curl);
-                throw new Exception($message, $error);
+                $title = 'Curl request failed: ';
+                $message = $title . curl_error($this->_curl);
+                throw new \Exception($message, $error);
             }
         }
     }

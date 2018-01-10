@@ -3,12 +3,8 @@
 use api\response\Error;
 
 /**
- * Class pinChatMessage
- * @package api\method
- * @link https://core.telegram.org/bots/api#pinchatmessage
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property int|string chat_id
  * @property int message_id
@@ -32,8 +28,10 @@ class pinChatMessage extends Method
 {
 
     /**
-     * Every method have a response type.
-     * @return string the class's name.
+     * Every method have a response type,
+     * and in this method we will return a Response.
+     *
+     * @return string
      */
     protected function response()
     {

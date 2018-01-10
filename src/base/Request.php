@@ -3,19 +3,26 @@
 use api\InputFile;
 use yii\helpers\Json;
 use api\media\InputMedia;
-use yii\helpers\ArrayHelper as AH;
 
 /**
- * Class Request
- * @package api\base
+ * Making requests
+ * All queries to the Telegram Bot API must be served over HTTPS
+ * and need to be presented in this form:
+ * `https://api.telegram.org/bot<token>/METHOD_NAM`
  *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5.5
+ * We support only POST HTTP method.
+ *
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  */
 class Request extends Object
 {
 
-    const SERVER = 'api.telegram.org';
+    /**
+     * Request Configs
+     */
+    const SERVER = 'https://api.telegram.org';
+    const API_PATTERN = '{server}/bot{token}/';
 
     /**
      * @var Token
@@ -24,7 +31,7 @@ class Request extends Object
 
     /**
      * Request constructor.
-     * @param string|Token $token
+     * @param Token|string $token
      * @param array $params
      */
     public function __construct($token, $params = [])
@@ -38,6 +45,13 @@ class Request extends Object
     }
 
     /**
+     * Checks if a param is set, i.e. defined and not null.
+     * method that will be implicitly called when executing
+     * `isset($object->property)`.
+     *
+     * Note that if the param is not defined,
+     * false will be returned.
+     *
      * @param string $name
      * @return bool
      */
@@ -47,6 +61,13 @@ class Request extends Object
     }
 
     /**
+     * Sets a request param to null.
+     * method that will be implicitly called when executing
+     * `unset($object->property)`.
+     *
+     * Note that if the param is not defined,
+     * this method will do nothing.
+     *
      * @param string $name
      * @return $this
      */
@@ -57,6 +78,10 @@ class Request extends Object
     }
 
     /**
+     * Sets value of a request param.
+     * method that will be implicitly called when executing
+     * `$object->property = $value;`.
+     *
      * @param string $name
      * @param mixed $value
      * @return $this
@@ -68,6 +93,13 @@ class Request extends Object
     }
 
     /**
+     * Checks if a param is set, i.e. defined and not null.
+     * method that will be implicitly called when executing
+     * `isset($object->property)`.
+     *
+     * Note that if the param is not defined,
+     * null will be returned.
+     *
      * @param string $name
      * @param mixed $default
      * @return mixed
@@ -82,6 +114,29 @@ class Request extends Object
     }
 
     /**
+     * Checks if a file exists in the request that need
+     * to uploading in telegram server.
+     *
+     * @return bool
+     */
+    public function hasFile()
+    {
+        $exist = false;
+        $params = $this->__array();
+        array_walk_recursive($params,
+            function ($param) use (&$exist) {
+                if ($param instanceof InputFile)
+                    $exist = true;
+            }
+        );
+
+        return $exist;
+    }
+
+    /**
+     * This method will send a request object to telegram
+     * server and get back the response.
+     *
      * @return array
      */
     public function send()
@@ -98,55 +153,34 @@ class Request extends Object
             ]
         ]);
 
-        $params = [];
-        foreach ($this->__array() as $key => $value) {
-            if (is_array($value)) {
-                if (AH::isIndexed($value)) {
-                    $valueObj = $this->get($key);
-                    foreach ($valueObj as $index => $item) {
-                        if (
-                            $item instanceof InputMedia &&
-                            $item->media instanceof InputFile
-                        ) {
-                            $fileName = $item->media->getFilename();
-                            $id = 'file_' . md5($fileName);
+        $params = $this->params;
+        array_walk_recursive(
+            $params, function (&$value) {
+                if (
+                    $value instanceof InputMedia &&
+                    $value->media instanceof InputFile
+                ) {
+                    $media = $value->media;
+                    $fileName = $media->getFilename();
+                    $id = 'attached_' . md5($fileName);
 
-                            $field = $item->__array();
-                            $field['media'] = 'attach://' . $id;
-
-                            $value[$index] = $field;
-                            $params[$id] = $item->media;
-                        }
-                    }
+                    $this->set($id, $media);
+                    $value = $value->__array();
+                    $value['media'] = 'attach://' . $id;
                 }
-
-                $params[$key] = Json::encode($value);
-                continue;
-            }
-
-            $params[$key] = $value;
-        }
-
-        $curl->setOption(CURLOPT_POSTFIELDS, $params);
-        $hostInfo = 'https://' . self::SERVER . '/bot';
-        $apiAddress = $hostInfo . $this->token . '/';
-        return $curl->post($apiAddress, true);
-    }
-
-    /**
-     * @return bool
-     */
-    private function hasFile()
-    {
-        $exist = false;
-        $params = $this->__array();
-        array_walk_recursive($params,
-            function ($param) use (&$exist) {
-                if ($param instanceof InputFile)
-                    $exist = true;
+                if ($value instanceof Object) {
+                    $value = $value->__array();
+                }
+                if (is_array($value)) {
+                    $value = Json::encode($value);
+                }
             }
         );
 
-        return $exist;
+        $pairs['{token}'] = $this->token;
+        $pairs['{server}'] = self::SERVER;
+        $apiAddress = strtr(self::API_PATTERN, $pairs);
+        $curl->setOption(CURLOPT_POSTFIELDS, $params);
+        return $curl->post($apiAddress, true);
     }
 }

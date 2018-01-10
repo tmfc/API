@@ -1,25 +1,20 @@
 <?php namespace api\method;
 
 use api\base\API;
-use api\base\Object;
 use api\base\Request;
+use yii\base\Response;
 use api\response\Error;
 use api\event\AfterSend;
 use api\event\BeforeSend;
-use api\response\Response;
 use api\event\RequestFailed;
 use api\event\RequestSucceed;
-use yii\helpers\StringHelper;
 use yii\helpers\ArrayHelper as AH;
 use yii\base\UnknownClassException;
+use yii\helpers\StringHelper as SH;
 
 /**
- * Class Method
- * @package api\method
- * @link https://core.telegram.org/bots/api#available-methods
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  */
 abstract class Method extends Request
 {
@@ -30,8 +25,7 @@ abstract class Method extends Request
     public static function methodName()
     {
         $className = self::className();
-        $correctName = StringHelper::basename($className);
-        return lcfirst($correctName);
+        return SH::basename($className);
     }
 
     /**
@@ -50,18 +44,22 @@ abstract class Method extends Request
      */
     public function send()
     {
-        API::trigger(API::EVENT_BEFORE_SEND, new BeforeSend([
-            'method' => $this,
-            'token' => $this->token
-        ]));
+        API::trigger(API::EVENT_BEFORE_SEND,
+            new BeforeSend([
+                'method' => $this,
+                'token' => $this->token
+            ])
+        );
 
         $response = parent::send();
 
-        API::trigger(API::EVENT_AFTER_SEND, new AfterSend([
-            'method' => $this,
-            'response' => $response,
-            'token' => $this->token
-        ]));
+        API::trigger(API::EVENT_AFTER_SEND,
+            new AfterSend([
+                'method' => $this,
+                'response' => $response,
+                'token' => $this->token
+            ])
+        );
 
         if (AH::keyExists('result', $response)) {
             $result = $response['result'];
@@ -69,27 +67,31 @@ abstract class Method extends Request
                 $className = $this->response();
                 if (class_exists($className)) {
                     $value = $result;
-                    $result = $this->createRelation(
+                    $result = $this->createResponse(
                         $className, $value
                     );
                 }
             }
 
-            API::trigger(API::EVENT_REQUEST_SUCCEED, new RequestSucceed([
-                'method' => $this,
-                'result' => $result,
-                'token' => $this->token
-            ]));
+            API::trigger(API::EVENT_REQUEST_SUCCEED,
+                new RequestSucceed([
+                    'method' => $this,
+                    'result' => $result,
+                    'token' => $this->token
+                ])
+            );
 
             return $result;
         }
         elseif (is_array($response)) {
             $error = new Error($response);
-            API::trigger(API::EVENT_REQUEST_FAILED, new RequestFailed([
-                'method' => $this,
-                'error' => $error,
-                'token' => $this->token
-            ]));
+            API::trigger(API::EVENT_REQUEST_FAILED,
+                new RequestFailed([
+                    'method' => $this,
+                    'error' => $error,
+                    'token' => $this->token
+                ])
+            );
 
             return $error;
         }
@@ -99,14 +101,14 @@ abstract class Method extends Request
 
     /**
      * @param string $className
-     * @param array $properties
+     * @param array $params
      * @return array
      * @throws UnknownClassException
      */
-    private function createRelation($className, $properties)
+    private function createResponse($className, $params)
     {
-        if (AH::isAssociative($properties)) {
-            $class = new $className($properties);
+        if (AH::isAssociative($params)) {
+            $class = new $className($params);
             if ($class instanceof Response) {
                 return $class;
             }
@@ -115,10 +117,10 @@ abstract class Method extends Request
             throw new UnknownClassException($message);
         }
 
-        if (AH::isIndexed($properties)) {
+        if (AH::isIndexed($params)) {
             $output = [];
-            foreach ($properties as $index => $value) {
-                $output[$index] = $this->createRelation(
+            foreach ($params as $key => $value) {
+                $output[$key] = $this->createResponse(
                     $className, $value
                 );
             }
@@ -126,12 +128,14 @@ abstract class Method extends Request
             return $output;
         }
 
-        return $properties;
+        return $params;
     }
 
     /**
-     * Every method have a response type.
-     * @return string the class's name.
+     * Every method have a response type,
+     * and in this method we will return a Response.
+     *
+     * @return string
      */
     abstract protected function response();
 }

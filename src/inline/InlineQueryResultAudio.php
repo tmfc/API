@@ -4,12 +4,8 @@ use api\input\InputMessageContent;
 use api\keyboard\InlineKeyboardMarkup;
 
 /**
- * Class InlineQueryResultAudio
- * @package api\inline
- * @link https://core.telegram.org/bots/api#inlinequeryresultaudio
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string audio_url
  * @property string title

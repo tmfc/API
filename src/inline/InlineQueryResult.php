@@ -1,16 +1,12 @@
 <?php namespace api\inline;
 
 use api\base\Object;
-use yii\helpers\Inflector;
-use yii\helpers\StringHelper;
+use yii\helpers\Inflector as STR;
+use yii\helpers\StringHelper as SH;
 
 /**
- * Class InlineQueryResult
- * @package api\inline
- * @link https://core.telegram.org/bots/api#inlinequeryresult
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string id
  *
@@ -27,15 +23,13 @@ abstract class InlineQueryResult extends Object
      */
     public static function typeName()
     {
-        $className = self::className();
-        $baseName = StringHelper::basename($className);
-
-        $mainName = 'InlineQueryResult';
-        $replaces = [$mainName, $mainName . 'Cached'];
-        $replaced = str_replace($replaces, '', $baseName);
-
-        $correctType = Inflector::camel2id($replaced, '_');
-        return $correctType;
+        return STR::camel2id(
+            str_replace(
+                ['InlineQueryResult', 'InlineQueryResultCached'],
+                '', SH::basename(self::className())
+            ),
+            '_'
+        );
     }
 
     /**
@@ -46,14 +40,5 @@ abstract class InlineQueryResult extends Object
     public function init()
     {
         $this->__set('type', $this->typeName());
-        parent::init();
-    }
-
-    /**
-     * @param array $results
-     */
-    public function addTo(array &$results)
-    {
-        $results[] = $this;
     }
 }

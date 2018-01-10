@@ -3,12 +3,8 @@
 use api\response\CallbackGame;
 
 /**
- * Class InlineKeyboardButton
- * @package api\keyboard\button
- * @link https://core.telegram.org/bots/api#inlinekeyboardbutton
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string text
  * @property string url
@@ -49,18 +45,4 @@ use api\response\CallbackGame;
  */
 class InlineKeyboardButton extends Button
 {
-
-    /**
-     * InlineKeyboardButton constructor.
-     * @param array|string $properties
-     */
-    public function __construct($properties = [])
-    {
-        if (is_string($properties)) {
-            $this->text = $properties;
-            $properties = [];
-        }
-
-        parent::__construct($properties);
-    }
 }

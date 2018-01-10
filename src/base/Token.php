@@ -1,21 +1,26 @@
 <?php namespace api\base;
 
-use api\exceptions\InvalidTokenException;
+use yii\base\Object;
+use yii\base\InvalidParamException;
 
 /**
- * Class Token
- * @package api\base
+ * Authorizing your bot:
+ * Each bot is given a unique authentication token when
+ * it is created.
  *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.5.5
+ * The token looks something like follow line:
+ * `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11`
+ *
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property int id
  * @property string key
  */
-class Token extends \yii\base\Object
+class Token extends Object
 {
 
-    const PATTERN = '/(\d+)\:(.*)/';
+    const PATTERN = '/\d+\:.*/';
 
     /**
      * @var int
@@ -28,6 +33,7 @@ class Token extends \yii\base\Object
     private $_key;
 
     /**
+     * ID is an Unique identifier for bots.
      * @return int
      */
     public function getId()
@@ -36,6 +42,7 @@ class Token extends \yii\base\Object
     }
 
     /**
+     * Key is an auth string for bots.
      * @return string
      */
     public function getKey()
@@ -57,17 +64,16 @@ class Token extends \yii\base\Object
      */
     public function __construct($token)
     {
-        $pattern = self::PATTERN;
-        $preg = @preg_match($pattern, $token, $matches);
-        if ($preg && sizeof($matches) === 3) {
-            $this->_id = intval($matches[1]);
-            $this->_key = $matches[2];
-        }
-        else {
-            $message = 'Invalid Token: ' . $token;
-            throw new InvalidTokenException($message);
+        if (preg_match(self::PATTERN, $token)) {
+            $parts = explode(':', $token);
+            $this->_id = intval($parts[0]);
+            $this->_key = $parts[1];
+
+            parent::__construct();
+            return;
         }
 
-        parent::__construct();
+        $message = 'Invalid Token: ' . $token;
+        throw new InvalidParamException($message);
     }
 }

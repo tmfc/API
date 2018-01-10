@@ -1,11 +1,8 @@
 <?php namespace api\response;
 
 /**
- * Class Error
- * @package api\response
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property int error_code
  * @property ResponseParameters parameters
@@ -22,8 +19,9 @@ class Error extends Response
 {
 
     /**
-     * Every object have relations with other object,
-     * in this method we introduce all object we have relations.
+     * Response can have relations with other objects,
+     * in this method we introduce all objects this object
+     * have relations.
      *
      * @return array of objects
      */

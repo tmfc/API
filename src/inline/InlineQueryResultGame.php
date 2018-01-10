@@ -3,12 +3,8 @@
 use api\keyboard\InlineKeyboardMarkup;
 
 /**
- * Class InlineQueryResultGame
- * @package api\inline
- * @link https://core.telegram.org/bots/api#inlinequeryresultgame
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string game_short_name
  * @property InlineKeyboardMarkup reply_markup

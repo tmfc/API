@@ -1,14 +1,14 @@
 {
     "license": "MIT",
+    "type": "library",
     "name": "botstan/api",
-    "type": "yii2-extension",
     "minimum-stability": "stable",
     "description": "Use telegram bot api easily.",
-    "keywords": ["yii2","extension","telegram","bot","api"],
+    "keywords": ["yii2","telegram","bot","api"],
     "authors": [
         {
-            "name": "Mehdi Khodayari Khoram",
-            "email": "khodayari.khoram@gmail.com"
+            "name": "MehdiKhody",
+            "email": "khody.khoram@gmail.com"
         }
     ],
     "support": {

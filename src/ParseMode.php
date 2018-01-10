@@ -12,12 +12,8 @@
  * that Telegram clients will display an alert to the user before
  * opening an inline link (‘Open this link?’ together with the full URL).
  *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
- *
- * Class ParseMode
- * @package api
- * @link https://core.telegram.org/bots/api#formatting-options
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  */
 abstract class ParseMode
 {

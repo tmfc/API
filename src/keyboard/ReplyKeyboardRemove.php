@@ -1,12 +1,8 @@
 <?php namespace api\keyboard;
 
 /**
- * Class ReplyKeyboardRemove
- * @package api\keyboard
- * @link https://core.telegram.org/bots/api#replykeyboardremove
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property bool remove_keyboard
  * @property bool selective
@@ -24,12 +20,12 @@ class ReplyKeyboardRemove extends Keyboard
 {
 
     /**
-     * ReplyKeyboardRemove constructor.
-     * @param array $properties
+     * Initializes the object.
+     * This method is invoked at the end of the constructor after
+     * the object is initialized with the given configuration.
      */
-    public function __construct(array $properties = [])
+    public function init()
     {
         $this->remove_keyboard = true;
-        parent::__construct($properties);
     }
 }

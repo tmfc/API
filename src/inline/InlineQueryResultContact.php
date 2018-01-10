@@ -4,12 +4,8 @@ use api\input\InputMessageContent;
 use api\keyboard\InlineKeyboardMarkup;
 
 /**
- * Class InlineQueryResultContact
- * @package api\inline
- * @link https://core.telegram.org/bots/api#inlinequeryresultcontact
- *
- * @author Mehdi Khodayari <khodayari.khoram@gmail.com>
- * @since 3.4
+ * @author MehdiKhody <khody.khoram@gmail.com>
+ * @since 1.0.0
  *
  * @property string phone_number
  * @property string first_name
