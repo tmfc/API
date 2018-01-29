@@ -85,7 +85,7 @@ if ($response instanceof Error) {
 }
 ```
 
-### Helprs
+### Helpers
 Helpers is used to assist in providing some functionality, which isn't the main goal of the library.
 
 #### Actions
