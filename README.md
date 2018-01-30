@@ -276,10 +276,10 @@ Use `answerInlineQuery` method to send answers to an inline query. On success, *
 > No more than **50** results per query are allowed.
 
 ```php
-$getQuery = $api->getUpdates();
-$getQuery->limit = 1;
-$getQuery->allowed_updates = ['inline_query'];
-$updates = $getQuery->send();
+$getUpdates = $api->getUpdates();
+$getUpdates->limit = 1;
+$getUpdates->allowed_updates = ['inline_query'];
+$updates = $getUpdates->send();
 
 if (sizeof($updates) == 1) {
     $inlineQuery = $updates[0];
