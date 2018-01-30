@@ -27,9 +27,7 @@ composer require botstan/api
 
 ## Usage
 
-The most common way of using this library is to create a new object from the API class, which allows you to access all of the authorized telegram methods.
-
-> By using the API class, events can also be used for you, which in the end of this article has been taught how to use it.
+The most common way of using this library is to create a new object from the API class, which allows you to access all of the authorized Telegram methods. By using the API class, events can also be used for you, which in the end of this article has been taught how to use it.
 
 ```php
 $token = '<token>';
@@ -40,7 +38,7 @@ $api = new \api\base\API($token);
 
 ### Request
 
-As we said, this library is HTTP-based interface, and all requests are sent using the **POST** method. To create a simple request, you must create a new object from the Request class and send the input parameters such as the method name.
+As we said, this library is an HTTP-based interface, and all requests are sent using the **POST** method. To create a simple request, you must create a new object from the Request class and send the input parameters such as the method name.
 
 ```php
 $request = new \api\base\Request($token, [
@@ -86,13 +84,13 @@ if ($response instanceof \api\response\Message) {
 
 > **NOTE**
 >
-> Making any request that directly uses the Request object will send us an array response, not as an Response object.
+> Making any request that directly uses the Request object will send us an array response, not an object.
 
 
 
 ### Methods
 
-We will support all the methods already in the [Telegram documentation](https://core.telegram.org/bots/api#available-methods). You can access all of them through `src\methods` and edit them if you wish. All methods in the API are case-insensitive. We only support **POST** HTTP method and we will use  **`multipart/form-data`**  for passing files to Telegram.
+We will support all the methods already in the [Telegram documentation](https://core.telegram.org/bots/api#available-methods). You can access all of them through `src\methods` and edit them if you wish. All methods in the API are case-insensitive. We only support **POST** HTTP method and we will use  **`multipart/form-data`**  for passing files to Telegram server.
 
 
 
@@ -107,6 +105,7 @@ $request = $api->sendPhoto();
 $request->chat_id = '<chat_id>';
 $request->caption = 'sent by file_id.';
 $request->photo = 'AgADBAADXME4GxQXZAc6zkxv265UJKGYEAAEC';
+$request->send();
 ```
 
 > **NOTE**
@@ -129,6 +128,7 @@ $request = $api->sendPhoto();
 $request->chat_id = '<chat_id>';
 $request->caption = 'sent by url.';
 $request->photo = 'http://example.com/photos/dogs.jpg';
+$request->send();
 ```
 
 
@@ -142,6 +142,7 @@ $request = $api->sendPhoto();
 $request->chat_id = '<chat_id>';
 $request->caption = 'sent by InputFile.';
 $request->photo = new \api\InputFile('@photos/cats.jpg');
+$request->send();
 ```
 
 
@@ -235,9 +236,7 @@ $markup->addButton($switchBtn, 2);
 
 ### Inline Mode
 
-The following methods and objects allow your bot to work in [inline mode](https://core.telegram.org/bots/inline). Please see Telegram [Introduction to Inline bots](https://core.telegram.org/bots/inline) for more details.
-
-To enable this option, send the `/setinline` command to [@BotFather](https://t.me/botfather) and provide the placeholder text that the user will see in the input field after typing your bot’s name.
+The following methods and objects allow your bot to work in [inline mode](https://core.telegram.org/bots/inline). Please see Telegram [Introduction to Inline bots](https://core.telegram.org/bots/inline) for more details. To enable this option, send the `/setinline` command to [@BotFather](https://t.me/botfather) and provide the placeholder text that the user will see in the input field after typing your bot’s name.
 
 <p align="center">
    <img src="https://core.telegram.org/file/811140995/1/I-wubuXAnzk/2e39739d0ac6bd5458" title="Users can type the bot’s username in any chat, then type a query without sending any messages" width="400px">
