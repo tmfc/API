@@ -2,7 +2,7 @@
 
 use api\base\API;
 use api\base\Request;
-use yii\base\Response;
+use api\base\Response;
 use api\response\Error;
 use api\event\AfterSend;
 use api\event\BeforeSend;
