@@ -15,7 +15,7 @@ use api\media\InputMedia;
  * @author MehdiKhody <khody.khoram@gmail.com>
  * @since 1.0.0
  */
-class Request extends Object
+class Request extends BaseObject
 {
 
     /**

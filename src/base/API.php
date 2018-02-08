@@ -1,6 +1,6 @@
 <?php namespace api\base;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 use api\method\getMe;
 use api\method\getFile;
 use api\method\getChat;
@@ -121,7 +121,7 @@ use api\method\stopMessageLiveLocation;
  * @method setGameScore setGameScore($params = [])
  * @method getGameHighScores getGameHighScores($params = [])
  */
-class API extends Object
+class API extends BaseObject
 {
 
     use Events;
