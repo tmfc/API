@@ -1,6 +1,6 @@
 <?php namespace api\response;
 
-use api\base\Object;
+use api\base\BaseObject;
 use yii\helpers\ArrayHelper as AH;
 use yii\base\UnknownClassException;
 
@@ -8,7 +8,7 @@ use yii\base\UnknownClassException;
  * @author MehdiKhody <khody.khoram@gmail.com>
  * @since 1.0
  */
-abstract class Response extends Object
+abstract class Response extends BaseObject
 {
 
     /**
