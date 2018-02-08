@@ -21,7 +21,7 @@ use yii\helpers\ArrayHelper as AH;
  * @author MehdiKhody <khody.khoram@gmail.com>
  * @since 1.0.0
  */
-class Object extends \yii\base\Object
+class BaseObject extends \yii\base\BaseObject
 {
 
     /**
